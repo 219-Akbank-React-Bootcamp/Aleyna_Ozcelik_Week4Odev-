@@ -76,14 +76,12 @@ function App() {
   //   }
 
   // ]
-  const [list, setList] = useState([])
+  const [list, setList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
-  // const [statusList, setStatusList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [statusModalOpen, setStatusModalOpen] = useState(false);
-  const [catDeleteModalOpen, setCatDeleteModalOpen] = useState(false);
-  const [stDeleteModalOpen, setStDeleteModalOpen] = useState(false);
+ 
 
   const uniqueIdGenerator = () => {
     return Math.floor(Math.random() * 100000 + 1);
@@ -111,31 +109,30 @@ function App() {
       {
         id: uniqueIdGenerator(),
         title,
-        statusList:[],
+        statusList: [],
 
       },
     ])
   }
-  
+
   //DELETE
   const handleDeleteItems = (id) => {
     const newList = list.filter((item) => item.id !== id);
     setList(newList);
-    const newcatList = categoryList.filter((item) => item.id !== id);
+    const newcatList = categoryList.filter((item) => item.id !== id)
     setCategoryList(newcatList)
   }
-  const handleStDeleteItems = (id) => {
-
-
-    const newcatList = categoryList.map((it)=>
-    it.statusList.filter((st)=>st.id !== id)
+  const handleStDelete = (id) => {
+    const newList = categoryList.map((i) => {
+      i.statusList.filter((item) => item.id !== id )
+      
+      return i
+    })
+    console.log(newList)
+   setCategoryList(newList)
     
-    )
-    
-
-    // setStatusList(newcatList)
   }
-console.log(categoryList)
+
 
   return (
     <>
@@ -151,33 +148,24 @@ console.log(categoryList)
         />
         <CategoryModal
           categoryList={categoryList}
+          handleDeleteItems={handleDeleteItems}
           defaultValue=""
           handleAddCategory={handleAddCategory}
           categoryModalOpen={categoryModalOpen}
           setCategoryModalOpen={setCategoryModalOpen}
-          setCatDeleteModalOpen={setCatDeleteModalOpen}
+        
         />
         <StatusModal
+          handleStDelete={handleStDelete}
           setCategoryList={setCategoryList}
           categoryList={categoryList}
           statusModalOpen={statusModalOpen}
           setStatusModalOpen={setStatusModalOpen}
           uniqueIdGenerator={uniqueIdGenerator}
-          setStDeleteModalOpen={setStDeleteModalOpen}
+          
 
         />
-        <DeleteCategory
-          catDeleteModalOpen={catDeleteModalOpen}
-          setCatDeleteModalOpen={setCatDeleteModalOpen}
-          categoryList={categoryList}
-          handleDeleteItems={handleDeleteItems}
-        />
-        <DeleteStatus
-          stDeleteModalOpen={stDeleteModalOpen}
-          setStDeleteModalOpen={setStDeleteModalOpen}
-          categoryList={categoryList}
-          handleStDeleteItems={handleStDeleteItems}
-        />
+       
         <div className='addButtons'>
           <Buttons
             setModalOpen={setModalOpen}
