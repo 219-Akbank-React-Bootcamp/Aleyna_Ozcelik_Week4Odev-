@@ -16,7 +16,7 @@ function SelectCategorynStatus(props) {
       <option selected style={{fontWeight: 'bold'}}> Durum Seçiniz</option>
         {props.categoryList.map((statu) =>
           statu.statusList?.map((fi,index) =>
-            <option value={fi.id} key={index} id={fi.id}>{fi.text}</option>
+            <option value={fi.id} key={index}  style={{color:fi.color}} id={fi.id}>{fi.text}</option>
           )
 
         )

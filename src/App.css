@@ -1,7 +1,6 @@
-
 .container {
   position: relative;
-  top:50px;
+  top: 50px;
   border-radius: 20px;
   width: 900px;
   margin: auto;
@@ -13,26 +12,28 @@ h1 {
   text-align: center;
 }
 
-.addButtons{
+.addButtons {
   display: flex;
   justify-content: space-between;
   width: 800px;
 
 }
+
 .addBtn {
   border-radius: 10px;
-  width: 100px;
+  width: 120px;
   padding: 10px;
   background-color: purple;
   color: white;
   border: none;
   margin-bottom: 20px;
 }
-.filters_select{
+
+.filters_select {
   width: 20%;
-  border:none;
+  border: none;
   background-color: #f0eeee;
-  border-radius:10px;
+  border-radius: 10px;
   height: 40px;
 }
 
@@ -80,7 +81,6 @@ h1 {
 }
 
 .todoModalForm__container {
- 
   width: inherit;
   height: inherit;
   display: flex;
@@ -91,7 +91,6 @@ h1 {
 
 .form-control {
   width: 40%;
- 
   border-radius: 10px;
   border: 1px solid #afa6a7;
   background-color: #f0eeee;
@@ -117,23 +116,23 @@ h1 {
 
 .addCategory {
   margin-bottom: 20px;
-  margin-top:20px;
+  margin-top: 20px;
   font-size: 16px;
   padding: 7px;
   border-radius: 4px;
   width: 30%;
-  border:none;
+  border: none;
   background-color: #f0eeee;
   color: #7b00005c;
   font-family: 'Courgette', cursive;
-  
+
 }
 
 
 .save-btn {
   cursor: pointer;
   margin-top: 20px;
-  width:160px;
+  width: 160px;
   height: 35px;
   background-color: #ee9b9bac;
   color: #7b00005c;
@@ -147,6 +146,7 @@ h1 {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 }
+
 .save-btn:hover {
   color: #7b0000bd;
 
@@ -230,4 +230,19 @@ h1 {
   cursor: pointer;
   font-size: 15px;
   color: #a02b2b;
+}
+
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.deleteCat{
+  position: relative;
+  right: 20px;
+  float: right;
+ 
 }

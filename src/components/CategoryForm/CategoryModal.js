@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
+
 function CategoryForm(props) {
+  
   const [value, setValue] = useState({
     
     title:props.defaultValue,
@@ -17,7 +20,6 @@ const handleCategoryChange = (event) => {
 }
 const handleClick = () => {
         props.handleAddCategory(value)
-        
         setValue('')
         props.setCategoryModalOpen(false)
 }
@@ -26,6 +28,10 @@ const handleClick = () => {
     props.categoryModalOpen && ( //Eğer modalopen True ise modal göstericek , False ise gösterilmicek.
       <div className='modal' >
         <div id="modalBody" className="modal-body">
+        <div className="deleteCat">
+                <button className="save-btn "onClick={() =>  props.setCatDeleteModalOpen(true)? props.setCategoryModalOpen(true):props.setCategoryModalOpen(false)}>Kategori Sil</button>
+            </div>
+          
           <form id="todoForm" className='todoModalForm__container' >
             <button className='close-btn' type="button" onClick={() => props.setCategoryModalOpen(false)}>
               <FontAwesomeIcon icon={faXmark} />
