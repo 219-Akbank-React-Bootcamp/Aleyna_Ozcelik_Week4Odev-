@@ -19,16 +19,14 @@ function CategoryForm(props) {
     props.handleAddCategory(value)
    
   }
-
   return (
-    props.categoryModalOpen && ( //Eğer modalopen True ise modal göstericek , False ise gösterilmicek.
+    props.categoryModalOpen && (
       <div className='modal' >
         <div id="modalBody" className="modal-body">
           <div className="split left">
             <div className="centered">
-              {props.categoryList?.map((ctgry) =>
-                <li className="todo-item" id={ctgry.id} >
-
+              {props.categoryList?.map((ctgry,index) =>
+                <li className="todo-item" id={ctgry.id} key={index}>
                   <div className="todo-item-details">
                     <span className="todo-item-title">{ctgry.title} </span>
                   </div>
@@ -49,9 +47,7 @@ function CategoryForm(props) {
               <FontAwesomeIcon icon={faXmark} />
             </button>
             <div className="centered">
-
               <form id="todoForm" className='todoModalForm__container' >
-
                 <input
                   name="title"
                   type="text"
@@ -67,45 +63,11 @@ function CategoryForm(props) {
                   onClick={handleClick}
                 >Ekle
                 </button>
-
               </form>
             </div>
           </div>
-
         </div>
       </div>
-
-
-
-      // <div className='modal' >
-      //   <div id="modalBody" className="modal-body">
-      //   <div className="deleteCat">
-      //           <button className="save-btn "onClick={() =>  props.setCatDeleteModalOpen(true)? props.setCategoryModalOpen(true):props.setCategoryModalOpen(false)}>Kategori Sil</button>
-      //       </div>
-
-      //     <form id="todoForm" className='todoModalForm__container' >
-      //       <button className='close-btn' type="button" onClick={() => props.setCategoryModalOpen(false)}>
-      //         <FontAwesomeIcon icon={faXmark} />
-      //       </button>
-      //       <input
-      //         name="title"
-      //         type="text"
-      //         className="form-control input"
-      //         placeholder="Add Category"
-      //         value={value.title}
-      //         onChange={handleCategoryChange}
-      //         autoComplete="off"
-      //       />
-      //       <button
-      //         className="save-btn"
-      //         type="button"
-      //         onClick={handleClick}
-      //       >Ekle
-      //       </button>
-
-      //     </form>
-      //   </div>
-      // </div>
     )
   )
 }

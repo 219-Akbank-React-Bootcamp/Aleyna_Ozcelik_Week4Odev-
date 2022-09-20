@@ -23,7 +23,7 @@ const TodoModal = (props) => {
 
         props.modalOpen && ( //Eğer modalopen True ise modal göstericek , False ise gösterilmicek.
             <div className='modal' >
-                <div id="modalBody" className="modal-body">
+                <div id="modalBody" className="modal-body" style={{backgroundColor:"#6e25a56c"}}>
                     <form id="todoForm" className='todoModalForm__container' >
                         <button className='close-btn' type="button" onClick={() => props.setModalOpen(false)}>
                             <FontAwesomeIcon icon={faXmark} />
@@ -33,7 +33,7 @@ const TodoModal = (props) => {
                             onChange={handleChange}
                             value={value.title}
                             type="text"
-                            className="form-control input"
+                            className="form-control_modal input"
                             placeholder="Title"
                             autoComplete="off"
                         />
@@ -42,12 +42,12 @@ const TodoModal = (props) => {
                             type="text"
                             value={value.desc}
                             onChange={handleChange}
-                            className="form-control textarea"
+                            className="form-control_modal textarea"
                             placeholder="Description"
                         >
                         </textarea>
 
-                        <select className='addCategory' name="category"
+                        <select className='form-control_modal' name="category"
                             onChange={handleChange} >
                             <option selected> Kategori Seçiniz</option>
                             {props.categoryList?.map((ctgry, index) =>
@@ -55,7 +55,7 @@ const TodoModal = (props) => {
                             )}
 
                         </select>
-                        <select className='addCategory' name="statusList" onChange={handleChange} >
+                        <select className='form-control_modal' name="statusList" onChange={handleChange} >
                             {
                                 props.categoryList.map((statu) => {
                                     if (statu.id == value.category) {

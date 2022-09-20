@@ -34,7 +34,7 @@ function StatusModal(props) {
                     }
                     : { ...item }
             ))
-      
+            setValue("")
        
     }
 
@@ -56,10 +56,8 @@ function StatusModal(props) {
                                         <button className="delete-btn" type="button" onClick={() => props.handleStDelete(fi.id)} >
                                             <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                                         </button>
-
                                     </li>
                                 )
-
                             )
                             }
                         </div>

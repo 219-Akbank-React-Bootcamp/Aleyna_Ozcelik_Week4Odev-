@@ -128,6 +128,16 @@ h1 {
   color: black;
   font-size: 17px;
 }
+.form-control_modal{
+  width:30%;
+  border-radius: 10px;
+  border: 1px solid #afa6a7;
+  background-color: #f0eeee;
+  color: black;
+  font-size: 17px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
 
 .form-control.input {
   height: 30px;

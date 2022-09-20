@@ -6,7 +6,7 @@ function todoItem(props) {
     <>
       <li className="todo-item" id={props.id}>
         <div>
-          <input className="todo-item-check" type='checkbox' />
+          <input className="todo-item-check"  type='checkbox' />
         </div>
         <div className="todo-item-details">
           <span className="todo-item-title">{props.title} </span>

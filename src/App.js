@@ -5,12 +5,8 @@ import TodoModal from './components/TodoForm/TodoModal';
 import TodoList from './components/TodoForm/todoList';
 import CategoryModal from './components/CategoryForm/CategoryModal'
 import StatusModal from './components/CategoryForm/StatusModal'
-import DeleteCategory from './components/CategoryForm/DeleteCategory'
 import Buttons from './components/Buttons/Buttons';
 import Filters from './components/Filters/SelectCategorynStatus';
-import DeleteStatus from './components/CategoryForm/DeleteStatus';
-
-
 
 function App() {
   // const listOfCategory = [
@@ -110,7 +106,6 @@ function App() {
         id: uniqueIdGenerator(),
         title,
         statusList: [],
-
       },
     ])
   }
@@ -125,19 +120,16 @@ function App() {
   const handleStDelete = (id) => {
     const newList = categoryList.map((i) => {
       i.statusList.filter((item) => item.id !== id )
-      
       return i
     })
     console.log(newList)
    setCategoryList(newList)
-    
   }
 
 
   return (
     <>
       <div className="container">
-
         <h1>TODO LIST</h1>
         <TodoModal
           defaultValue=""
@@ -162,10 +154,7 @@ function App() {
           statusModalOpen={statusModalOpen}
           setStatusModalOpen={setStatusModalOpen}
           uniqueIdGenerator={uniqueIdGenerator}
-          
-
         />
-       
         <div className='addButtons'>
           <Buttons
             setModalOpen={setModalOpen}
@@ -182,7 +171,6 @@ function App() {
           setList={setList}
           list={list}
         />
-
       </div>
     </>
   );
