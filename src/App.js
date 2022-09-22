@@ -1,8 +1,8 @@
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import TodoModal from './components/TodoForm/TodoModal';
-import TodoList from './components/TodoForm/todoList';
+import TodoList from './components/TodoForm/TodoList';
 import CategoryModal from './components/CategoryForm/CategoryModal'
 import StatusModal from './components/CategoryForm/StatusModal'
 import Buttons from './components/Buttons/Buttons';
@@ -77,12 +77,12 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [statusModalOpen, setStatusModalOpen] = useState(false);
- 
+  const [filtered, setFiltered] = useState()
 
   const uniqueIdGenerator = () => {
     return Math.floor(Math.random() * 100000 + 1);
   };
-
+  var filteredList = useMemo(getFilteredList, [filtered, list]);
 
   //ADD 
   const handleAddTodo = ({ title, desc, category, statusList }) => {
@@ -99,6 +99,7 @@ function App() {
     ])
 
   }
+
   const handleAddCategory = ({ title }) => {
     setCategoryList((prev) => [
       ...prev,
@@ -117,15 +118,22 @@ function App() {
     const newcatList = categoryList.filter((item) => item.id !== id)
     setCategoryList(newcatList)
   }
+
   const handleStDelete = (id) => {
     const newList = categoryList.map((i) => {
-      i.statusList.filter((item) => item.id !== id )
+      i.statusList = i.statusList.filter((item) => item.id !== id)
       return i
     })
-    console.log(newList)
-   setCategoryList(newList)
+    setCategoryList(newList)
   }
 
+  //FILTER
+  function getFilteredList() {
+    if (!filtered) {
+      return list;
+    }
+    return list.filter((item) => item.category === filtered || item.statusList === filtered);
+  }
 
   return (
     <>
@@ -138,38 +146,45 @@ function App() {
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
         />
+
         <CategoryModal
+          defaultValue=""
           categoryList={categoryList}
           handleDeleteItems={handleDeleteItems}
-          defaultValue=""
           handleAddCategory={handleAddCategory}
           categoryModalOpen={categoryModalOpen}
           setCategoryModalOpen={setCategoryModalOpen}
-        
+
         />
+
         <StatusModal
           handleStDelete={handleStDelete}
           setCategoryList={setCategoryList}
           categoryList={categoryList}
           statusModalOpen={statusModalOpen}
           setStatusModalOpen={setStatusModalOpen}
-          uniqueIdGenerator={uniqueIdGenerator}
         />
+
         <div className='addButtons'>
+
           <Buttons
             setModalOpen={setModalOpen}
             setCategoryModalOpen={setCategoryModalOpen}
             setStatusModalOpen={setStatusModalOpen}
           />
+
           <Filters
             categoryList={categoryList}
-            setCategoryList={setCategoryList}
+            setFiltered={setFiltered}
           />
+
         </div>
+
         <TodoList
           handleDeleteItems={handleDeleteItems}
           setList={setList}
           list={list}
+          filteredList={filteredList}
         />
       </div>
     </>

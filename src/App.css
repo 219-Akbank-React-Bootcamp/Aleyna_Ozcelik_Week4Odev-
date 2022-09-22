@@ -138,7 +138,10 @@ h1 {
   margin-bottom: 20px;
   padding: 10px;
 }
-
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
 .form-control.input {
   height: 30px;
   margin-bottom: 20px;

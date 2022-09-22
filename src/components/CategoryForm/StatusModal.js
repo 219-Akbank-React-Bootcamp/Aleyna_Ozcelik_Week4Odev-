@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function StatusModal(props) {
-
+    const uniqueIdGenerator = () => {
+        return Math.floor(Math.random() * 100000 + 1);
+      };
     const [value, setValue] = useState({
 
         text: props.defaultValue,
@@ -26,7 +28,7 @@ function StatusModal(props) {
                         statusList: [
                             ...item.statusList,
                             {
-                                id: props.uniqueIdGenerator(),
+                                id: uniqueIdGenerator(),
                                 text: value.text,
                                 color: value.color
                             }
@@ -35,7 +37,6 @@ function StatusModal(props) {
                     : { ...item }
             ))
             setValue("")
-       
     }
 
     return (
@@ -62,7 +63,6 @@ function StatusModal(props) {
                             }
                         </div>
                     </div>
-
                     <div className="split right">
                     <button className='close-btn' type="button" onClick={() => props.setStatusModalOpen(false)}>
                                     <FontAwesomeIcon icon={faXmark} />

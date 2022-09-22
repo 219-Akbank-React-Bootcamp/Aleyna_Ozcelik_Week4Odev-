@@ -6,6 +6,7 @@ const TodoModal = (props) => {
     const [value, setValue] = useState({
         title: props.defaultValue,
         desc: props.defaultValue,
+       
     })
 
     const handleChange = (event) => {
@@ -14,11 +15,14 @@ const TodoModal = (props) => {
             [event.target.name]: event.target.value,
         }))
     }
+
     const handleClick = () => {
         props.handleAddTodo(value)
         props.setModalOpen(false)
+     
     }
-
+    
+   
     return (
 
         props.modalOpen && ( //Eğer modalopen True ise modal göstericek , False ise gösterilmicek.
@@ -55,12 +59,13 @@ const TodoModal = (props) => {
                             )}
 
                         </select>
-                        <select className='form-control_modal' name="statusList" onChange={handleChange} >
-                            {
-                                props.categoryList.map((statu) => {
+                        <select className='form-control_modal' name="statusList" 
+                        onChange={handleChange} >
+                            {props.categoryList.map((statu) => {
                                     if (statu.id == value.category) {
-                                        return statu.statusList?.map((fi, index) =>
+                                        return statu.statusList.map((fi, index) =>
                                             <option value={fi.id} key={index} id={fi.id}>{fi.text}</option>
+                                            
                                         )
                                     }
                                 })
