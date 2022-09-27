@@ -117,7 +117,7 @@ function StatusModal(props) {
                                         <button
                                             className="delete-btn"
                                             type="button"
-                                            onClick={() => props.handleStDelete(fi.id,category.id)} >
+                                            onClick={() => props.handleStDelete(fi.id, category.id)} >
                                             <FontAwesomeIcon icon={faTrash} />
                                         </button>
                                     </li>

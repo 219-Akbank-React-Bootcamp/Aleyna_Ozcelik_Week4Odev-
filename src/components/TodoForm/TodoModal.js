@@ -34,7 +34,7 @@ const TodoModal = (props) => {
 
     return (
 
-        props.modalOpen && ( //Eğer modalopen True ise modal göstericek , False ise gösterilmicek.
+        props.modalOpen && (
             <div className='modal' >
                 <div id="modalBody" className="modal-body" style={{ backgroundColor: "#6e25a56c" }}>
                     <form id="todoForm" className='todoModalForm__container' >
