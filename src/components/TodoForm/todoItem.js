@@ -10,30 +10,29 @@ function TodoItem(props) {
     setChecked(!checked);
 
   };
-
-  const handleCategoryChange = (event) => {
-    //console.log(event.currentTarget.name)
-
-    props.setList(props.list.map((ctgry) =>
-      ctgry.category !== event.target.value
-        ? { ...ctgry, category: event.target.value }
-        : { ...ctgry }
-    ))
-    console.log(props.list)
-
-  }
-  const handleStatusListChange = (event) => {
-    //console.log(event.currentTarget.name)
-
-    props.setList(props.list.map((ctgry) =>
-      ctgry.statusList !== event.target.value
-        ? { ...ctgry, statusList: event.target.value }
-        : { ...ctgry }
-    ))
+  let selectCategoryId = document.getElementById('selectCategoryList')
+  const handleCategoryChange = (id) => {
+    props.setList(
+      props.list.map((ctgry) =>
+        ctgry.id === id
+          ? { ...ctgry, category: selectCategoryId.value }
+          : { ...ctgry }
+      ))
     console.log(props.list)
 
   }
 
+  let selectStatusId = document.getElementById('selectStatusList')
+  const handleStatusListChange = (id) => {
+    //console.log(event.currentTarget.name)
+
+    props.setList(props.list.map((ctgry) =>
+      ctgry.id === id
+        ? { ...ctgry, statusList: selectStatusId.value }
+        : { ...ctgry }
+    ))
+  }
+ 
   const handleSave = () => {
     setEdit(false)
     if (editValue) {
@@ -79,16 +78,21 @@ function TodoItem(props) {
         <select
           className='filters_select'
           name="category"
-          onChange={handleCategoryChange}>
-
+          id="selectCategoryList"
+          onChange={() => handleCategoryChange(props.id)}
+        >
+            <option selected> Kategori Seçiniz</option>
           {
             props.categoryList.map((ctgry, index) =>
+            <>
               <option
-                value={ctgry.title}
+            
+                value={ctgry.id}
                 key={index}
                 id={ctgry.id}>
                 {ctgry.title}
               </option>
+              </>
             )}
 
         </select>
@@ -97,13 +101,14 @@ function TodoItem(props) {
         <select
           className='filters_select'
           name="statusList"
-          onChange={handleStatusListChange}>
-
+          id="selectStatusList"
+          onChange={()=>handleStatusListChange(props.id)}>
+         <option> Durum Seçiniz</option>
           {
             props.categoryList.map((statu) =>
               statu.statusList?.map((fi, index) =>
                 <option
-                  value={fi.text}
+                  value={fi.id}
                   id={fi.id}
                   key={index}
                   style={{ color: fi.color }}>

@@ -46,7 +46,6 @@ function SelectCategorynStatus(props) {
         {
           props.categoryList.map((statu) =>
             statu.statusList?.map((fi, index) =>
-
               <option
                 value={fi.id}
                 id={fi.id}

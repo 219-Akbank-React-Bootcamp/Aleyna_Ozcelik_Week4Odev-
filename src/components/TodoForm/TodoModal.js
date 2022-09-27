@@ -5,8 +5,8 @@ const TodoModal = (props) => {
 
     const [value, setValue] = useState({
         title: props.defaultValue,
-        
-       
+
+
     })
 
     const handleChange = (event) => {
@@ -15,19 +15,28 @@ const TodoModal = (props) => {
             [event.target.name]: event.target.value,
         }))
     }
+    let alt = document.getElementById('durum')
 
     const handleClick = () => {
-        props.handleAddTodo(value)
-        props.setModalOpen(false)
-     
-    }
     
-   
+        if (alt.value === "Durum Seçiniz") {
+            alert("Durum Seçmelisiniz.")
+
+            return
+
+        } else {
+           
+            props.handleAddTodo(value)
+            props.setModalOpen(false)
+        }
+    }
+
+
     return (
 
         props.modalOpen && ( //Eğer modalopen True ise modal göstericek , False ise gösterilmicek.
             <div className='modal' >
-                <div id="modalBody" className="modal-body" style={{backgroundColor:"#6e25a56c"}}>
+                <div id="modalBody" className="modal-body" style={{ backgroundColor: "#6e25a56c" }}>
                     <form id="todoForm" className='todoModalForm__container' >
                         <button className='close-btn' type="button" onClick={() => props.setModalOpen(false)}>
                             <FontAwesomeIcon icon={faXmark} />
@@ -49,16 +58,17 @@ const TodoModal = (props) => {
                             )}
 
                         </select>
-                        <select className='form-control_modal' name="statusList" 
-                        onChange={handleChange} >
+                        <select className='form-control_modal' name="statusList"
+                            onChange={handleChange} id="durum">
+                            <option  selected> Durum Seçiniz</option>
                             {props.categoryList.map((statu) => {
-                                    if (statu.id == value.category) {
-                                        return statu.statusList.map((fi, index) =>
-                                            <option value={fi.id} key={index} id={fi.id}>{fi.text}</option>
-                                            
-                                        )
-                                    }
-                                })
+                                if (statu.id == value.category) {
+                                    return statu.statusList.map((fi, index) =>
+                                        <option value={fi.id} key={index} id={fi.id}>{fi.text}</option>
+
+                                    )
+                                }
+                            })
                             }
                         </select>
                         <button

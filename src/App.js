@@ -28,6 +28,8 @@ function App() {
 
   //ADD 
   const handleAddTodo = ({ title, category, statusList }) => {
+
+
     setList((prev) => [
       ...prev,
       {
@@ -69,17 +71,91 @@ function App() {
     }
   }
 
-  const handleStDelete = (id) => {
+  const handleStDelete = (stId, catId) => {
+    // console.log(id)
+    // const findCatDeletedSt =
+    //   categoryList.filter((category) => category.id === catId)
+    // console.log(findCatDeletedSt)
+
+    // const deletedStIndex =
+    //   findCatDeletedSt.statusList?.findIndex((st) =>
+    //     st.id === stId
+
+    //   )
+
+    // const findDeletedStInList =
+    //   list.find((st) =>
+    //     Number(st.statusList) === stId
+    //   )
+    // findDeletedStInList.category = findCatDeletedSt[deletedStIndex + 1].catId
+    // findDeletedStInList.statusList = findCatDeletedSt[deletedStIndex + 1].stId
+
+    // setList([...list])
+    let deneme;
+    const findCatDeletedSt = categoryList.map((statu) => {
+      if (statu.id == catId) {
+        deneme = statu.statusList
+      }
+    })
+
+    console.log(deneme.length)
+    //  findCatDeletedSt.statusList.map((i)=>console.log(i.length))
+
+    const deletedStIndex =
+      deneme.findIndex((st) =>
+        st.id === stId
+
+      )
+
+  
+
+    if (deneme.length === 1) {
+      alert("nereye amcam")
+      return
+    } else {
+      if (deneme.length == [deletedStIndex + 1]) {
+        list.map((todo) =>{
+    
+          if( todo.statusList.id === stId){
+            todo.statusList = deneme[0]
+          }
+          
+        })
+        
+  
+
+      } else {
+        
+        list.map((todo) =>{
+    
+          if( todo.statusList.id === stId){
+            todo.statusList =  deneme[deletedStIndex + 1]
+          }
+          
+        })
+        
+
+      }
+    }
+
+    setList([...list])
+
+
 
     const newList = categoryList.map((i) => {
-      i.statusList = i.statusList.filter((item) => item.id !== id)
+      i.statusList = i.statusList.filter((item) => item.id !== stId)
       return i
     })
+
     setCategoryList(newList)
-    
+
+
+
   }
 
 
+
+console.log(list)
 
 
   //FILTER
