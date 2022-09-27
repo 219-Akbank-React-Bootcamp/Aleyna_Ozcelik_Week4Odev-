@@ -9,97 +9,36 @@ import Buttons from './components/Buttons/Buttons';
 import Filters from './components/Filters/SelectCategorynStatus';
 
 function App() {
-  // const listOfCategory = [
-  //   {
-  //     id: 1,
-  //     title: 'eğitim',
-  //     statusList: [
-  //       {
-  //         id: 1,
-  //         color: "purple",
-  //         text: 'ders saati belirlendi',
 
-  //       },
-  //       {
-  //         id: 2,
-  //         color: "purple",
-  //         text: 'ders başladı'
-  //       },
-  //       {
-  //         id: 3,
-  //         color: "purple",
-  //         text: 'dersteyiz'
-  //       },
-  //       {
-  //         id: 4,
-  //         color: "purple",
-  //         text: 'ders bitti ödevverildi'
-  //       },
-  //       {
-  //         id: 5,
-  //         color: "purple",
-  //         text: 'ödevler kontrol edildi'
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'ev işleri',
-  //     statusList: [{
-  //       id: 19,
-  //       color: "red",
-  //       text: 'temizlik saati belirlendi'
-  //     },
-  //     {
-  //       id: 20,
-  //       color: "blue",
-  //       text: 'temizlik başladı'
-  //     },
-  //     {
-  //       id: 21,
-  //       color: "yellow",
-  //       text: 'temizliyoruz'
-  //     },
-  //     {
-  //       id: 22,
-  //       color: "aqua",
-  //       text: 'temizlik bitti'
-  //     },
-
-  //     ],
-
-
-  //   }
-
-  // ]
   const [list, setList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
+  const [filtered, setFiltered] = useState()
+
+  // MODALS
   const [modalOpen, setModalOpen] = useState(false);
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [statusModalOpen, setStatusModalOpen] = useState(false);
-  const [filtered, setFiltered] = useState()
 
+  //ID GENERATOR
   const uniqueIdGenerator = () => {
     return Math.floor(Math.random() * 100000 + 1);
   };
-  var filteredList = useMemo(getFilteredList, [filtered, list]);
+
+
 
   //ADD 
-  const handleAddTodo = ({ title, desc, category, statusList }) => {
+  const handleAddTodo = ({ title, category, statusList }) => {
     setList((prev) => [
       ...prev,
       {
         id: uniqueIdGenerator(),
         title,
-        desc,
         category,
         statusList,
 
       },
     ])
-
   }
-
   const handleAddCategory = ({ title }) => {
     setCategoryList((prev) => [
       ...prev,
@@ -111,21 +50,37 @@ function App() {
     ])
   }
 
-  //DELETE
+  //DELETE TODO
   const handleDeleteItems = (id) => {
     const newList = list.filter((item) => item.id !== id);
     setList(newList);
-    const newcatList = categoryList.filter((item) => item.id !== id)
-    setCategoryList(newcatList)
+  }
+  //DELETE CATEGORY
+  const handleDeleteCat = (id) => {
+    if (
+      window.confirm(
+        `Kategoriyi silmek istediğinizden emin misiniz?`
+      )
+    ) {
+      setCategoryList(
+        categoryList.filter((category) => category.id !== id)
+      );
+      setList(list.filter((todo) => Number(todo.category) !== id));
+    }
   }
 
   const handleStDelete = (id) => {
+
     const newList = categoryList.map((i) => {
       i.statusList = i.statusList.filter((item) => item.id !== id)
       return i
     })
     setCategoryList(newList)
+    
   }
+
+
+
 
   //FILTER
   function getFilteredList() {
@@ -135,10 +90,13 @@ function App() {
     return list.filter((item) => item.category === filtered || item.statusList === filtered);
   }
 
+  var filteredList = useMemo(getFilteredList, [filtered, list]);
+
   return (
     <>
       <div className="container">
         <h1>TODO LIST</h1>
+
         <TodoModal
           defaultValue=""
           categoryList={categoryList}
@@ -148,16 +106,18 @@ function App() {
         />
 
         <CategoryModal
+          setCategoryList={setCategoryList}
           defaultValue=""
           categoryList={categoryList}
           handleDeleteItems={handleDeleteItems}
           handleAddCategory={handleAddCategory}
           categoryModalOpen={categoryModalOpen}
           setCategoryModalOpen={setCategoryModalOpen}
-
+          handleDeleteCat={handleDeleteCat}
         />
 
         <StatusModal
+          defaultValue=""
           handleStDelete={handleStDelete}
           setCategoryList={setCategoryList}
           categoryList={categoryList}
@@ -181,9 +141,11 @@ function App() {
         </div>
 
         <TodoList
-          handleDeleteItems={handleDeleteItems}
           setList={setList}
+          setModalOpen={setModalOpen}
           list={list}
+          categoryList={categoryList}
+          handleDeleteItems={handleDeleteItems}
           filteredList={filteredList}
         />
       </div>

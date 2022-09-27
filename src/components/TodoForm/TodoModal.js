@@ -5,7 +5,7 @@ const TodoModal = (props) => {
 
     const [value, setValue] = useState({
         title: props.defaultValue,
-        desc: props.defaultValue,
+        
        
     })
 
@@ -41,16 +41,6 @@ const TodoModal = (props) => {
                             placeholder="Title"
                             autoComplete="off"
                         />
-                        <textarea
-                            name="desc"
-                            type="text"
-                            value={value.desc}
-                            onChange={handleChange}
-                            className="form-control_modal textarea"
-                            placeholder="Description"
-                        >
-                        </textarea>
-
                         <select className='form-control_modal' name="category"
                             onChange={handleChange} >
                             <option selected> Kategori Seçiniz</option>
