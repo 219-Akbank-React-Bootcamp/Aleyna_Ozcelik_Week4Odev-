@@ -5,8 +5,6 @@ const TodoModal = (props) => {
 
     const [value, setValue] = useState({
         title: props.defaultValue,
-
-
     })
 
     const handleChange = (event) => {
@@ -36,7 +34,7 @@ const TodoModal = (props) => {
 
         props.modalOpen && (
             <div className='modal' >
-                <div id="modalBody" className="modal-body" style={{ backgroundColor: "#6e25a56c" }}>
+                <div id="modalBody" className="modal-body" >
                     <form id="todoForm" className='todoModalForm__container' >
                         <button className='close-btn' type="button" onClick={() => props.setModalOpen(false)}>
                             <FontAwesomeIcon icon={faXmark} />

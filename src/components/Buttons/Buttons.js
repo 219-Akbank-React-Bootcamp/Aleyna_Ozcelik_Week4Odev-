@@ -7,7 +7,7 @@ function Buttons(props) {
         className="addBtn"
         type="button"
         onClick={() => props.setModalOpen(true)}
-      >Ekle
+      >Todo Ekle
       </button>
       <button
         className="addBtn"

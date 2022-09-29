@@ -61,8 +61,9 @@ function CategoryForm(props) {
                       (
                         <input
                           type="text"
+
                           name='editValue'
-                          className="todo-item-title"
+                          className="todo-item-title editItemInput"
                           value={editValue}
                           defaultValue={ctgry.title}
                           onChange={(e) => setEditValue(e.target.value)} />
@@ -97,7 +98,7 @@ function CategoryForm(props) {
           </div>
 
           <div className="split right">
-            <button className='close-btn' type="button" onClick={() => props.setCategoryModalOpen(false)}>
+            <button className='close-btn2' type="button" onClick={() => props.setCategoryModalOpen(false)}>
               <FontAwesomeIcon icon={faXmark} />
             </button>
             <div className="centered">

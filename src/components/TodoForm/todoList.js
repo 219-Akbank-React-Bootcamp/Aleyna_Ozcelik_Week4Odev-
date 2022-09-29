@@ -3,19 +3,21 @@ import TodoItem from '../TodoForm/TodoItem'
 function TodoList(props) {
   
   
-  const handleEditTodos= (editValue,id) => 
+  const handleEditTodos= (editValue,selectedStatu,selectedCat,id) => 
   {
     
     const newTodosList = [...props.filteredList]
     newTodosList.forEach((todo)=>{
       
       if(todo.id === id){
-       todo.title = editValue     
+       todo.title = editValue
+       todo.statusList = selectedStatu     
+       todo.category = selectedCat    
        }
     })
     props.setList(newTodosList)
   }
- 
+ console.log(props.filteredList)
   return (
     <div className='todoList__container' >
       <ul id="todoItems" className="todos">
@@ -32,7 +34,6 @@ function TodoList(props) {
             key={index}
             st={item.statusList}
             title={item.title}
-            desc={item.desc}
             category={item.category}
             handleEditTodos={handleEditTodos}
           />

@@ -5,38 +5,18 @@ function TodoItem(props) {
   const [checked, setChecked] = useState(false);
   const [edit, setEdit] = useState(false)
   const [editValue, setEditValue] = useState(props.title)
+  const [selectedStatu, setSelectedStatu] = useState(props.st)
+  const [selectedCat, setSelectedCat] = useState(props.category)
+
   const checkedText = () => { //Checkbox tıklandığında title'ın üstü çizilir.
 
     setChecked(!checked);
 
   };
-  let selectCategoryId = document.getElementById('selectCategoryList')
-  const handleCategoryChange = (id) => {
-    props.setList(
-      props.list.map((ctgry) =>
-        ctgry.id === id
-          ? { ...ctgry, category: selectCategoryId.value }
-          : { ...ctgry }
-      ))
-    console.log(props.list)
-
-  }
-
-  let selectStatusId = document.getElementById('selectStatusList')
-  const handleStatusListChange = (id) => {
-    //console.log(event.currentTarget.name)
-
-    props.setList(props.list.map((ctgry) =>
-      ctgry.id === id
-        ? { ...ctgry, statusList: selectStatusId.value }
-        : { ...ctgry }
-    ))
-  }
- 
   const handleSave = () => {
     setEdit(false)
-    if (editValue) {
-      props.handleEditTodos(editValue, props.id)
+    if (editValue ,selectedStatu ,selectedCat) {
+      props.handleEditTodos(editValue,selectedStatu,selectedCat, props.id)
     } else {
       setEditValue(props.title)
     }
@@ -46,7 +26,6 @@ function TodoItem(props) {
     setEdit(true)
 
   }
-
 
   return (
     <>
@@ -64,6 +43,7 @@ function TodoItem(props) {
               <input
                 type="text"
                 name='editValue'
+                className='editItemInput'
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)} />
             ) : (
@@ -75,35 +55,40 @@ function TodoItem(props) {
 
         </div>
         {/* SELECT CATEGORY */}
-        <select
-          className='filters_select'
-          name="category"
-          id="selectCategoryList"
-          onChange={() => handleCategoryChange(props.id)}
-        >
+        {edit ?
+          (<select
+            className='filters_select '
+            name="category"
+            id="selectCategoryList"
+            style={{height:"20px",top:"0px"}}
+            onChange={(e) => setSelectedCat(e.target.value)}
+          >
             <option selected> Kategori Seçiniz</option>
-          {
-            props.categoryList.map((ctgry, index) =>
-            <>
-              <option
-            
-                value={ctgry.id}
-                key={index}
-                id={ctgry.id}>
-                {ctgry.title}
-              </option>
-              </>
-            )}
+            {
+              props.categoryList.map((ctgry, index) =>
+                <>
+                  <option
+                    value={ctgry.id}
+                    key={index}
+                    id={ctgry.id}>
+                    {ctgry.title}
+                  </option>
+                </>
+              )}
 
-        </select>
-        {/* SELECT STATUS */}
-
-        <select
+          </select>
+          ) :
+          (<span className='catNstatu'>Kategori : <span style={{ color: "#e77461" }}> 
+        
+          {props.category}</span></span>)
+        }
+        {edit ? (<select
           className='filters_select'
           name="statusList"
           id="selectStatusList"
-          onChange={()=>handleStatusListChange(props.id)}>
-         <option> Durum Seçiniz</option>
+          style={{height:"20px",top:"0px"}}
+          onChange={(e) => setSelectedStatu(e.target.value)}>
+          <option> Durum Seçiniz</option>
           {
             props.categoryList.map((statu) =>
               statu.statusList?.map((fi, index) =>
@@ -117,7 +102,11 @@ function TodoItem(props) {
               ))
           }
 
-        </select>
+        </select>)
+          : (
+            <span className='catNstatu'>Durum : <span style={{ color: "#e77461", fontWeight: "600" }}> {props.st}</span></span>
+          )
+        }
         {
           edit ? (
             <button

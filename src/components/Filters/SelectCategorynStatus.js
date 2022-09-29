@@ -6,7 +6,7 @@ function SelectCategorynStatus(props) {
   function handleFilter(event) {
     props.setFiltered(event.target.value);
   }
-
+ 
 
   return (
     <>
@@ -19,7 +19,7 @@ function SelectCategorynStatus(props) {
           value=""
           style={{ fontWeight: 'bold' }}
           selected>
-          Hepsini Gör
+          Kategori
         </option>
 
         {props.categoryList?.map((ctgry, index) =>
@@ -40,7 +40,7 @@ function SelectCategorynStatus(props) {
         <option
           value=""
           style={{ fontWeight: 'bold' }}>
-          Hepsini Gör
+          Durum
         </option>
 
         {

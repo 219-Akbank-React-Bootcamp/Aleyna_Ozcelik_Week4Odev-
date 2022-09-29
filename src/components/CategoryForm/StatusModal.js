@@ -78,17 +78,19 @@ function StatusModal(props) {
                             {props.categoryList.map((category) =>
                                 category.statusList?.map((fi, index) =>
                                     <li className="todo-item" id={fi.id} key={index} >
-                                        <div className="todo-item-details">
+                                        <div className="todo-item-details" >
                                             {edit === fi.id ?
                                                 (
                                                     <input
                                                         type="text"
+                                                        className='editItemInput'
                                                         name='editValue'
                                                         value={editValue}
                                                         defaultValue={fi.text}
                                                         onChange={(e) => setEditValue(e.target.value)} />
 
                                                 ) : (
+                                                    
                                                     <span className="todo-item-title">{fi.text}</span>
                                                 )
                                             }
@@ -129,17 +131,18 @@ function StatusModal(props) {
 
                     <div className="split right">
                         <button
-                            className='close-btn'
+                            className='close-btn2'
                             type="button"
                             onClick={() => props.setStatusModalOpen(false)}>
                             <FontAwesomeIcon icon={faXmark} />
                         </button>
 
                         <div className="centered">
-                            <form id="todoForm" className='todoModalForm__container'>
+                            <form id="todoForm" className='todoModalForm__container' >
                                 <select
                                     className='addCategory'
                                     name="category"
+                                 
                                     onChange={handleStatusChange}>
                                     <option
                                         style={{ fontWeight: 'bold' }}

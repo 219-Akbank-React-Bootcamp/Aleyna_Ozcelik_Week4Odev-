@@ -1,5 +1,5 @@
 
-import { useEffect, useMemo, useState } from 'react';
+import {useMemo, useState } from 'react';
 import './App.css';
 import TodoModal from './components/TodoForm/TodoModal';
 import TodoList from './components/TodoForm/TodoList';
@@ -120,12 +120,29 @@ function App() {
   }
 
   var filteredList = useMemo(getFilteredList, [filtered, list]);
-
+console.log(list)
   return (
     <>
       <div className="container">
+       
+        <div className='buttons__container '>
+        <div className='addButtons'>
         <h1>TODO LIST</h1>
+          <Buttons
+            setModalOpen={setModalOpen}
+            setCategoryModalOpen={setCategoryModalOpen}
+            setStatusModalOpen={setStatusModalOpen}
+          />
 
+          
+
+        </div>
+        <div  className='right__container'>
+        <Filters
+            categoryList={categoryList}
+            setFiltered={setFiltered}
+          />
+        <div className='todo-list__container'>
         <TodoModal
           defaultValue=""
           categoryList={categoryList}
@@ -153,22 +170,6 @@ function App() {
           statusModalOpen={statusModalOpen}
           setStatusModalOpen={setStatusModalOpen}
         />
-
-        <div className='addButtons'>
-
-          <Buttons
-            setModalOpen={setModalOpen}
-            setCategoryModalOpen={setCategoryModalOpen}
-            setStatusModalOpen={setStatusModalOpen}
-          />
-
-          <Filters
-            categoryList={categoryList}
-            setFiltered={setFiltered}
-          />
-
-        </div>
-
         <TodoList
           setList={setList}
           setModalOpen={setModalOpen}
@@ -177,6 +178,10 @@ function App() {
           handleDeleteItems={handleDeleteItems}
           filteredList={filteredList}
         />
+        </div>
+        </div>
+        </div>
+        
       </div>
     </>
   );
